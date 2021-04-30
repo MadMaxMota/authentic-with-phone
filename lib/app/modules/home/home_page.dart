@@ -1,13 +1,13 @@
-import 'package:authentication_in_flutter/screens/login_screen.dart';
+import 'package:authentication_in_flutter/app/modules/auth/login_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatefulWidget {
+mixin HomePage implements StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomePage> {
   final _auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
         onPressed: () async {
           await _auth.signOut();
           Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => LoginScreen()));
+              context, MaterialPageRoute(builder: (context) => LoginPage()));
         },
         child: Icon(Icons.logout),
       ),
