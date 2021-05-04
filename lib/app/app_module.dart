@@ -1,5 +1,4 @@
 import 'package:authentication_in_flutter/app/app_bloc.dart';
-import 'package:authentication_in_flutter/app/modules/auth/login_module.dart';
 import 'package:authentication_in_flutter/app/modules/auth/login_page.dart';
 import 'package:authentication_in_flutter/app/modules/home/home_page.dart';
 import 'package:flutter_modular/flutter_modular.dart';
