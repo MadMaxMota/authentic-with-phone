@@ -3,8 +3,7 @@ import 'package:flutter_masked_text/flutter_masked_text.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class PhoneNumberPage extends StatelessWidget {
-  final _phoneNumberController =
-      MaskedTextController(mask: "+00 (00) 0 0000-0000");
+  final _phoneNumberController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +24,7 @@ class PhoneNumberPage extends StatelessWidget {
                 cursorColor: Colors.red,
                 controller: _phoneNumberController,
                 onSubmitted: (value) {
-                  if (value.length == 20) {
+                  if (value.length == 14) {
                     Modular.to.pushNamed("/sign_in_page/$value");
                   }
                 },
