@@ -6,7 +6,7 @@ class SucessModule extends Module {
   List<Bind> get binds => [];
 
   @override
-  List<ModularRoute> get routers => [
+  List<ModularRoute> get routes => [
         ChildRoute("/sucess_page", child: (context, args) => SucessPage()),
       ];
 }

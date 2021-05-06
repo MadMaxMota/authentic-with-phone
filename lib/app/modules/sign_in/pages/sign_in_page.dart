@@ -30,33 +30,41 @@ class _SignInPageState extends State<SignInPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Sign in page"),
-        backgroundColor: Colors.red,
-      ),
-      backgroundColor: Colors.white,
+      appBar: AppBar(),
       body: SafeArea(
         child: SingleChildScrollView(
           physics: BouncingScrollPhysics(),
-          padding: const EdgeInsets.all(32),
+          padding: const EdgeInsets.all(20),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Text(
-                "Message sent to the number ${widget.phoneNumber}",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 20, 70, 30),
+                child: Text(
+                  'Confirme seu número',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 24,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: Text(
+                  "Digite o código de 4 dígitos enviado ao número de celular  ${widget.phoneNumber}:",
+                  style: TextStyle(
+                    color: Colors.grey[600],
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
                 ),
               ),
               const SizedBox(height: 32),
               TextField(
                 maxLength: 6,
                 maxLengthEnforced: true,
-                cursorColor: Colors.red,
+                cursorColor: Colors.grey,
                 onSubmitted: (value) {
                   if (value.length == 6) {
                     _phoneNumberAuthBloc.add(
@@ -69,50 +77,62 @@ class _SignInPageState extends State<SignInPage> {
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
                 ),
-                textAlign: TextAlign.center,
-                keyboardType: TextInputType.text,
+                keyboardType: TextInputType.number,
                 decoration: InputDecoration(
-                  hintText: "Code Sent",
+                  hintText: 'Informe o código OTP',
                   hintStyle: TextStyle(
                     color: Colors.black45,
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
                   ),
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(32),
+                    borderRadius: BorderRadius.circular(10),
                     borderSide: BorderSide(
                       color: Colors.black,
                       width: 2,
                     ),
                   ),
                   enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(32),
+                    borderRadius: BorderRadius.circular(10),
                     borderSide: BorderSide(
                       color: Colors.black,
                       width: 2,
                     ),
                   ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(32),
-                    borderSide: BorderSide(
-                      color: Colors.red,
-                      width: 2,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(right: 145),
+                child: TextButton(
+                  child: Text(
+                    "Reenviar código por SMS",
+                    style: TextStyle(color: Color(0xff008C8C)),
+                  ),
+                  onPressed: () {
+                    _phoneNumberAuthBloc.add(
+                      PhoneNumberAuthEvent.sendCodePressed(widget.phoneNumber),
+                    );
+                  },
+                ),
+              ),
+              const SizedBox(height: 120),
+              Container(
+                width: 300,
+                height: 50,
+                color: Color(0xff008C8C),
+                child: ElevatedButton(
+                  style:
+                      TextButton.styleFrom(backgroundColor: Color(0xff008C8C)),
+                  onPressed: () {},
+                  child: Text(
+                    'Avançar',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
                     ),
                   ),
                 ),
-              ),
-              const SizedBox(height: 32),
-              RaisedButton(
-                child: Text(
-                  "try to resend code",
-                  style: TextStyle(color: Colors.white),
-                ),
-                onPressed: () {
-                  _phoneNumberAuthBloc.add(
-                    PhoneNumberAuthEvent.sendCodePressed(widget.phoneNumber),
-                  );
-                },
-                color: Colors.red,
               ),
               const SizedBox(height: 32),
               BlocConsumer<PhoneNumberAuthBloc, PhoneNumberAuthState>(
